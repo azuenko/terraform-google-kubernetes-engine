@@ -49,6 +49,10 @@ resource "google_compute_firewall" "intra_egress" {
   allow { protocol = "esp" }
   allow { protocol = "ah" }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
 }
 
 
@@ -110,6 +114,11 @@ resource "google_compute_firewall" "master_webhooks" {
   }
 
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
+
 }
 
 
@@ -144,6 +153,11 @@ resource "google_compute_firewall" "shadow_allow_pods" {
       metadata = log_config.value.metadata
     }
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
 }
 
 resource "google_compute_firewall" "shadow_allow_master" {
@@ -170,6 +184,11 @@ resource "google_compute_firewall" "shadow_allow_master" {
       metadata = log_config.value.metadata
     }
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
 }
 
 resource "google_compute_firewall" "shadow_allow_nodes" {
@@ -205,6 +224,12 @@ resource "google_compute_firewall" "shadow_allow_nodes" {
       metadata = log_config.value.metadata
     }
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+
 }
 
 resource "google_compute_firewall" "shadow_allow_inkubelet" {
